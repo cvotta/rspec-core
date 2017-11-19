@@ -35,9 +35,11 @@ module RSpec::Core
         reporter.finish
       end
 
-      it "will allow profiling when activated after formatter is used" do
-        config.profile_examples = 10
-        reporter.finish
+      it "will allow profiler to be used without being properly setup" do
+        allow(config).to receive(:profile_examples?) { true }
+        expect {
+          reporter.finish
+        }.to_not raise_error
       end
     end
 
